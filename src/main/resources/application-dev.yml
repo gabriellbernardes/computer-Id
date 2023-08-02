@@ -1,0 +1,40 @@
+spring:
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        hbm2ddl:
+          auto: update
+        connection:
+          SetBigStringTryClob: true
+        jdbc:
+          batch_size: 0
+    database-platform: org.hibernate.dialect.OracleDialect
+
+  datasource:
+    #url: jdbc:h2:mem:testdb;INIT=RUNSCRIPT FROM 'classpath:init.sql'
+    #driverClassName: org.h2.Driver
+    #username: sa
+    #password: password
+    #url: jdbc:oracle:thin:@sux-racdbp-scan.unimedce.com.br:1521/unmprd.unimedce.com.br
+    url: jdbc:oracle:thin:@10.20.1.44:1521/unmtst.unimedce.com.br
+    driverClassName: oracle.jdbc.driver.OracleDriver
+    username: unmgeral
+    password: geral*
+    #jndi-name: java:jboss/datasources/oraclevmcard
+
+keycloak:
+  config:
+    clientesunimed:
+      file: stageRealm-keycloak.json
+
+logging:
+  level:
+    org.springframework.web.client.RestTemplate: DEBUG
+
+triagil:
+  authentication:
+    authorization-header: 'Bearer 93uw4bjoT-StYBWHf_RKF1w6DjwwOOoD5dd_9X3_aWU'
+  service:
+    score-url: 'https://api.dev.triagil.com.br/autorizai/v1/sync/score'

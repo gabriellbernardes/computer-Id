@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "keycloak.config.clientesunimed.file",
+  "type": "java.lang.String",
+  "description": "Path to keycloak configuration file"
+}]}

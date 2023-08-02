@@ -1,0 +1,8 @@
+{
+	"realm": "IntegracoesExternas",
+	"bearer-only": true,
+	"auth-server-url": "https://iam.unimedceara.com.br/auth",
+	"ssl-required": "external",
+	"resource": "api-core",
+	"use-resource-role-mappings": false
+}

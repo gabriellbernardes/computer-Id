@@ -1,0 +1,8 @@
+{
+  "realm": "ClientesUnimed",
+  "bearer-only": true,
+  "auth-server-url": "https://iam.unimedceara.com.br/auth/",
+  "ssl-required": "external",
+  "resource": "unimed-core",
+  "confidential-port": 0
+}
