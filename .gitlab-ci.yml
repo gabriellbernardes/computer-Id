@@ -1,0 +1,57 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  MAVEN_OPTS: "-Dhttps.protocols=TLSv1.2 -Dmaven.repo.local=.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
+  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
+  ENV: "stage"
+  VERFILE: "src/main/java/br/com/unimedceara/core/controllers/TesteController.java"
+
+build:
+  image: maven:3.8-jdk-11
+  stage: build
+  tags:
+    - custom
+  before_script: 
+    - |-
+      if [ "$CI_COMMIT_REF_NAME" == "master" ]; then
+         ENV=production
+      fi;
+  script:
+    - sed -i s/__HASH__/"$CI_COMMIT_SHA"/g $VERFILE
+    - sed -i s/__BUILD_DATE__/"$CI_COMMIT_TIMESTAMP"/g $VERFILE
+    - mvn clean package -P$ENV
+  artifacts:
+    name: core
+    paths:
+      - ./target/*.war
+  only:
+    - stage
+    - master
+    
+deploy:
+  stage: deploy
+  tags:
+    - java
+    - maven
+  script:
+    - /opt/wildfly/bin/jboss-cli.sh -c controller=$WILDFLY_SERVER_PRD --user=$WILDFLY_ADMIN_PRD --password=$WILDFLY_PASS_PRD --command="deploy ./target/jobs.war --force"
+  only:
+    - master
+  environment:
+    name: production
+    url: https://apps.unimedceara.com.br/jobs
+    
+deploy-teste:
+  stage: deploy
+  tags:
+    - java
+    - maven
+  script:
+    - /opt/wildfly/bin/jboss-cli.sh -c controller=$WILDFLY_SERVER_TST --user=$WILDFLY_ADMIN_TST --password=$WILDFLY_PASS_TST --command="deploy ./target/jobs.war --force"
+  only:
+    - stage
+  environment:
+    name: stage
+    url: https://appsteste.unimedceara.com.br/jobs
