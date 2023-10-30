@@ -17,12 +17,11 @@ spring:
     #driverClassName: org.h2.Driver
     #username: sa
     #password: password
-    #url: jdbc:oracle:thin:@sux-racdbp-scan.unimedce.com.br:1521/unmprd.unimedce.com.br
-    url: jdbc:oracle:thin:@10.20.1.44:1521/unmtst.unimedce.com.br
+    url: jdbc:oracle:thin:@-:1521/unmtst.-.com.br
     driverClassName: oracle.jdbc.driver.OracleDriver
-    username: unmgeral
-    password: geral*
-    #jndi-name: java:jboss/datasources/oraclevmcard
+    username: -
+    password: -*
+    #jndi-name: java:jboss/datasources/-
 
 keycloak:
   config:
@@ -35,6 +34,6 @@ logging:
 
 triagil:
   authentication:
-    authorization-header: 'Bearer 93uw4bjoT-StYBWHf_RKF1w6DjwwOOoD5dd_9X3_aWU'
+    authorization-header: -
   service:
-    score-url: 'https://api.dev.triagil.com.br/autorizai/v1/sync/score'
+    score-url: -
