@@ -7,16 +7,16 @@ spring:
         hbm2ddl:
           auto: update
   datasource:
-    jndi-name: java:jboss/datasources/oraclevmcard
+    jndi-name: -
 
 keycloak:
   config:
     clientesunimed:
-      file: stageRealm-keycloak.json
+      file: -
 
 
 triagil:
   authentication:
-    authorization-header: 'Bearer 93uw4bjoT-StYBWHf_RKF1w6DjwwOOoD5dd_9X3_aWU'
+    authorization-header: -
   service:
-    score-url: 'https://api.dev.triagil.com.br/autorizai/v1/sync/score'
+    score-url: -
